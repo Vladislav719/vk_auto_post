@@ -57,7 +57,7 @@ function check_wall($group_id, $vk_config) {
         'filter'   => 'all'
     ));
     $response = $obj_res['response'];
-    $items = $response['items'];
+    $items = $response->items;
     $owner_id = $items['from_id'];
     echo $color-> getColoredString($owner_id, "purple", "yellow");
 }

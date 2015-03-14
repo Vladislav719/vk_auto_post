@@ -75,7 +75,7 @@ function send_message($where_to, $message_text, $vk_config) {
     ));
 
     $msg = $msg['response'];
-    $post_id = $msg['post_it'];
+    $post_id = $msg['post_id'];
 
     echo "Message was sent to " . $where_to . " with post ID = " . $post_id;
 }

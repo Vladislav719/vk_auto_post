@@ -21,7 +21,7 @@ $vk_config = array(
     'api_secret'   => 'DGtGK74oOwIRO589YlEd',
     'callback_url' => 'http://api.vk.com/blank.html',
     'api_settings' => 'wall,groups,offline',
-    'access_token' => 'b7ffda95a585a8ec2a97f5e08e37bb329719764e244507da068f20246269d4155554c11c8b22ca47f1ca9'
+    'access_token' => 'fe9ec3545fc85336de925db942c1986497d288e8bbb3d7fe29865dd7b97afb964986b994371bbc1b122e7'
 );
 //683897451fb9aafbc8
 $vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);

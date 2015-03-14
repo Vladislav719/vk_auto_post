@@ -34,7 +34,7 @@ $vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
         $vk_config['api_settings'], $vk_config['callback_url']);
     echo '<a href="' . $authorize_url . '">Sign in with VK</a>';
 echo 1;
-$access_token = $vk->getAccessToken('683897451fb9aafbc8', $vk_config['callback_url']);
+$access_token = $vk->getAccessToken('3d2d41fbcebfe18bc5', $vk_config['callback_url']);
 echo 'access token: ' . $access_token['access_token']
     . '<br />expires: ' . $access_token['expires_in'] . ' sec.'
     . '<br />user id: ' . $access_token['user_id'] . '<br /><br />';

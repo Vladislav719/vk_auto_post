@@ -56,14 +56,12 @@ function check_wall($group_id, $vk_config) {
         'count'    => 1,
         'filter'   => 'others'
     ));
-    print_r($obj_res);
+//    print_r($obj_res);
     $response = $obj_res['response'];
-//    print_r($response);
     $items = $response[1];
     $owner_id = $items['from_id'];
-    print_r($owner_id);
-//    $owner_id = $owner_id['from_id'];
     echo $color-> getColoredString($owner_id, "purple", "yellow");
+    echo "\n";
 }
 
 

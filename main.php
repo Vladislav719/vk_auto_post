@@ -24,14 +24,13 @@ $vk_config = array(
     'access_token' => 'fe9ec3545fc85336de925db942c1986497d288e8bbb3d7fe29865dd7b97afb964986b994371bbc1b122e7',
     'my_page_id'   => '295273144'
 );
-//683897451fb9aafbc8
-$vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
- echo check_wall(-83577764, $vk_config, $vk_config['my_page_id']);
 
-//while (true) {
-//    send_group_list($vk_config);
-//    sleep(10);
-//}
+$vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
+
+while (true) {
+    send_group_list($vk_config);
+    sleep(40);
+}
 
 function send_group_list($vk_config) {
     $fin = fopen('groups.dat', 'r');
@@ -43,13 +42,14 @@ function send_group_list($vk_config) {
     while ($line = fgets($fin)) {
         $line = chop($line); //удаляем пробелы из строки
         list($group_id, $message_text) = explode(":",$line);
-
-        send_message($group_id, $message_text, $vk_config);
+        if(!check_wall($group_id,$vk_config)){
+            send_message($group_id, $message_text, $vk_config);
+        }
         sleep(1);
     }
 }
 
-function check_wall($group_id, $vk_config, $owner_script_me) {
+function check_wall($group_id, $vk_config) {
     $color = new Colors();
     $vk = new \VK\VK($vk_config['app_id'], $vk_config['api_secret'], $vk_config['access_token']);
     $obj_res = $vk -> api('wall.get', array(
@@ -63,7 +63,7 @@ function check_wall($group_id, $vk_config, $owner_script_me) {
     $owner_id = $items['from_id'];
 //    echo $color-> getColoredString($owner_id, "purple", "yellow");
 //    echo "\n";
-    return $owner_id == $owner_script_me;
+    return $owner_id == $vk_config['my_page_id'];
 }
 
 

@@ -11,6 +11,17 @@ require 'vk/VKException.php';
 require 'vk/Color.php';
 error_reporting(E_ALL);
 
+$colors = new Colors();
+
+// Test some basic printing with Colors class
+echo $colors->getColoredString("Testing Colors class, this is purple string on yellow background.", "purple", "yellow") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is blue string on light gray background.", "blue", "light_gray") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is red string on black background.", "red", "black") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is cyan string on green background.", "cyan", "green") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is cyan string on default background.", "cyan") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is default string on cyan background.", null, "cyan") . "\n";
+
+
 $vk_config = array(
     'app_id'       => '4817820',
     'api_secret'   => 'DGtGK74oOwIRO589YlEd',
@@ -69,12 +80,3 @@ function send_message($where_to, $message_text, $vk_config) {
     echo "Message was sent to " . $where_to . " with post ID = " . $post_id;
 }
 
-$colors = new Colors();
-
-// Test some basic printing with Colors class
-echo $colors->getColoredString("Testing Colors class, this is purple string on yellow background.", "purple", "yellow") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is blue string on light gray background.", "blue", "light_gray") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is red string on black background.", "red", "black") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is cyan string on green background.", "cyan", "green") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is cyan string on default background.", "cyan") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is default string on cyan background.", null, "cyan") . "\n";

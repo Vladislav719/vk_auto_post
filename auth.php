@@ -22,10 +22,10 @@ $vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
  * If you need switch the application in test mode,
  * add another parameter "true". Default value "false".
  * Ex. $vk->getAuthorizeURL($api_settings, $callback_url, true);
- */
-$authorize_url = $vk->getAuthorizeURL(
-    $vk_config['api_settings'], $vk_config['callback_url']);
-echo '<a href="' . $authorize_url . '">Sign in with VK</a>';
+// */
+//$authorize_url = $vk->getAuthorizeURL(
+//    $vk_config['api_settings'], $vk_config['callback_url']);
+//echo '<a href="' . $authorize_url . '">Sign in with VK</a>';
 echo 1;
 $access_token = $vk->getAccessToken('8b0a50390f5ba63c6e', $vk_config['callback_url']);
 echo 'access token: ' . $access_token['access_token'];

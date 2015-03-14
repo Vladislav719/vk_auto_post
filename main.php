@@ -8,6 +8,7 @@
 
 require 'vk/VK.php';
 require 'vk/VKException.php';
+require 'vk/Color.php';
 error_reporting(E_ALL);
 
 $vk_config = array(
@@ -15,13 +16,28 @@ $vk_config = array(
     'api_secret'   => 'DGtGK74oOwIRO589YlEd',
     'callback_url' => 'http://api.vk.com/blank.html',
     'api_settings' => 'wall,groups,offline',
-    'access_token' => 'ea951a16fd6d1e37604b400d5344ee5a186ba2727124c877c66e5dd37c335cf22639461dfc6e87881482e'
+    'access_token' => 'b7ffda95a585a8ec2a97f5e08e37bb329719764e244507da068f20246269d4155554c11c8b22ca47f1ca9'
 );
+//683897451fb9aafbc8
+$vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
+    /**
+     * If you need switch the application in test mode,
+     * add another parameter "true". Default value "false".
+     * Ex. $vk->getAuthorizeURL($api_settings, $callback_url, true);
+     */
+    $authorize_url = $vk->getAuthorizeURL(
+        $vk_config['api_settings'], $vk_config['callback_url']);
+    echo '<a href="' . $authorize_url . '">Sign in with VK</a>';
+$access_token = $vk->getAccessToken('683897451fb9aafbc8', $vk_config['callback_url']);
+echo 'access token: ' . $access_token['access_token']
+    . '<br />expires: ' . $access_token['expires_in'] . ' sec.'
+    . '<br />user id: ' . $access_token['user_id'] . '<br /><br />';
 
-while (true) {
-    send_group_list($vk_config);
-    sleep(10);
-}
+
+//while (true) {
+//    send_group_list($vk_config);
+//    sleep(10);
+//}
 
 function send_group_list($vk_config) {
     $fin = fopen('groups.dat', 'r');
@@ -52,3 +68,13 @@ function send_message($where_to, $message_text, $vk_config) {
 
     echo "Message was sent to " . $where_to . " with post ID = " . $post_id;
 }
+
+$colors = new Colors();
+
+// Test some basic printing with Colors class
+echo $colors->getColoredString("Testing Colors class, this is purple string on yellow background.", "purple", "yellow") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is blue string on light gray background.", "blue", "light_gray") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is red string on black background.", "red", "black") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is cyan string on green background.", "cyan", "green") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is cyan string on default background.", "cyan") . "\n";
+echo $colors->getColoredString("Testing Colors class, this is default string on cyan background.", null, "cyan") . "\n";

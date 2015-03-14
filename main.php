@@ -21,11 +21,12 @@ $vk_config = array(
     'api_secret'   => 'DGtGK74oOwIRO589YlEd',
     'callback_url' => 'http://api.vk.com/blank.html',
     'api_settings' => 'wall,groups,offline',
-    'access_token' => 'fe9ec3545fc85336de925db942c1986497d288e8bbb3d7fe29865dd7b97afb964986b994371bbc1b122e7'
+    'access_token' => 'fe9ec3545fc85336de925db942c1986497d288e8bbb3d7fe29865dd7b97afb964986b994371bbc1b122e7',
+    'my_page_id'   => '295273144'
 );
 //683897451fb9aafbc8
 $vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
- check_wall(-83577764, $vk_config);
+ echo check_wall(-83577764, $vk_config, $vk_config['my_page_id']);
 
 //while (true) {
 //    send_group_list($vk_config);
@@ -48,7 +49,7 @@ function send_group_list($vk_config) {
     }
 }
 
-function check_wall($group_id, $vk_config) {
+function check_wall($group_id, $vk_config, $owner_script_me) {
     $color = new Colors();
     $vk = new \VK\VK($vk_config['app_id'], $vk_config['api_secret'], $vk_config['access_token']);
     $obj_res = $vk -> api('wall.get', array(
@@ -60,8 +61,9 @@ function check_wall($group_id, $vk_config) {
     $response = $obj_res['response'];
     $items = $response[1];
     $owner_id = $items['from_id'];
-    echo $color-> getColoredString($owner_id, "purple", "yellow");
-    echo "\n";
+//    echo $color-> getColoredString($owner_id, "purple", "yellow");
+//    echo "\n";
+    return $owner_id == $owner_script_me;
 }
 
 

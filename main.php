@@ -15,12 +15,6 @@ $colors = new Colors();
 
 // Test some basic printing with Colors class
 echo $colors->getColoredString("Testing Colors class, this is purple string on yellow background.", "purple", "yellow") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is blue string on light gray background.", "blue", "light_gray") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is red string on black background.", "red", "black") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is cyan string on green background.", "cyan", "green") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is cyan string on default background.", "cyan") . "\n";
-echo $colors->getColoredString("Testing Colors class, this is default string on cyan background.", null, "cyan") . "\n";
-
 
 $vk_config = array(
     'app_id'       => '4817820',
@@ -39,6 +33,7 @@ $vk = new VK\VK($vk_config['app_id'], $vk_config['api_secret']);
     $authorize_url = $vk->getAuthorizeURL(
         $vk_config['api_settings'], $vk_config['callback_url']);
     echo '<a href="' . $authorize_url . '">Sign in with VK</a>';
+echo 1;
 $access_token = $vk->getAccessToken('683897451fb9aafbc8', $vk_config['callback_url']);
 echo 'access token: ' . $access_token['access_token']
     . '<br />expires: ' . $access_token['expires_in'] . ' sec.'
@@ -64,6 +59,20 @@ function send_group_list($vk_config) {
         send_message($group_id, $message_text, $vk_config);
         sleep(1);
     }
+}
+
+function check_wall($group_id, $vk_config) {
+    $color = new Colors();
+    $vk = new \VK\VK($vk_config['app_id'], $vk_config['api_secret'], $vk_config['access_token']);
+    $obj_res = $vk -> api('wall.get', array(
+        'owner_id' => $group_id,
+        'count'    => 1,
+        'filter'   => 'all'
+    ));
+    $response = $obj_res['response'];
+    $items = $response['items'];
+    $owner_id = $items['from_id'];
+    echo $color-> getColoredString($owner_id, "purple", "yellow");
 }
 
 

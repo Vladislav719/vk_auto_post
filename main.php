@@ -57,6 +57,7 @@ function check_wall($group_id, $vk_config) {
         'filter'   => 'all'
     ));
     $response = $obj_res['response'];
+    print_r($response);
     $items = $response['items'];
     $owner_id = $items[0];
     $owner_id = $owner_id['from_id'];
